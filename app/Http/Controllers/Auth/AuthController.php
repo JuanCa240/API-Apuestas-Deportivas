@@ -15,6 +15,22 @@ class AuthController extends Controller{
         $this->authService = $authService;
     }
 
+    public function register(Request $request){
+        $validator = Validator::make($request->all(),[
+            'name'=>'required|string',
+            'email'=>'required|email|unique:users',
+            'password'=>'required|min:6'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'errors'=>$validator->errors()
+            ],422);
+        }
+
+        return $this->authService->register($request->all());
+    }
+
     public function login(Request $request)
     {
         $validador = Validator::make($request->all(), [
