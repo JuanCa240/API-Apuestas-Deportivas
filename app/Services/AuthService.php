@@ -27,14 +27,13 @@ class AuthService{
 
 
     public function login(array $credentials){
-
         if(!$token = JWTAuth::attempt($credentials)){
             return response()->json([
                 'message' => 'Credenciales inválidas'
             ],401);
         }
 
-        $user = auth('api')->user();
+        $user = User::where('email', $credentials['email'])->first();
 
         $otp = OtpHelper::generateOtp();
         $expiration = OtpHelper::expirationTime();
