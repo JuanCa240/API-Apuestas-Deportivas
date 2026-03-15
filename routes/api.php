@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\EventoController;
+use App\Http\Controllers\Admin\EventoController;
 
 Route::prefix('auth')->group(function(){
 
