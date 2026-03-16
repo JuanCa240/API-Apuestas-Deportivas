@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\EventoController;
+use App\Http\Controllers\Admin\CuotaController;
 
 Route::prefix('auth')->group(function(){
 
@@ -13,10 +14,13 @@ Route::prefix('auth')->group(function(){
 
 });
 
+   // MIDDLEWARE
+
 Route::middleware('auth:api')->group(function(){
 
     Route::get('/me', [AuthController::class,'me']);
 
+    // EVENTOS
     Route::get('/eventos',[EventoController::class,'index']);
     Route::post('/eventos',[EventoController::class,'store']);
     Route::get('/eventos/{id}', [EventoController::class,'show']);
@@ -26,5 +30,11 @@ Route::middleware('auth:api')->group(function(){
     Route::get('/mis-apuestas',[ApuestaController::class,'misApuestas']);
     Route::get('/apuestas/{id}',[ApuestaController::class,'show']);
 
+
+    // CUOTAS
+    Route::post('/cuotas',[CuotaController::class,'store']);
+    Route::get('/eventos/{evento}/cuotas',[CuotaController::class,'cuotasPorEvento']);
+    Route::put('/cuotas/{id}',[CuotaController::class,'update']);
+    Route::delete('/cuotas/{id}',[CuotaController::class,'destroy']);
 
 });

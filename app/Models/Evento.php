@@ -29,4 +29,8 @@ class Evento extends Model{
     public function resultado(){
         return $this->hasOne(Resultado::class);
     }
+
+    public function cuotas(){
+        return $this->hasMany(Cuota::class);
+    }
 }
