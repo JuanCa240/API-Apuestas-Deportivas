@@ -10,7 +10,8 @@ class EventoController extends Controller
 {
     private EventoService $eventoService;
 
-    public function __construct(EventoService $eventoService){
+    public function __construct(EventoService $eventoService)
+    {
         $this->eventoService = $eventoService;
     }
 
@@ -26,7 +27,7 @@ class EventoController extends Controller
         return response()->json([
             'message' => 'Evento creado',
             'evento' => $this->eventoService->crear($request->all())
-        ],201);
+        ], 201);
     }
 
     public function show($id)
@@ -47,6 +48,13 @@ class EventoController extends Controller
     {
         return response()->json(
             $this->eventoService->destroy($id)
+        );
+    }
+
+    public function resultado(Request $request, $id)
+    {
+        return response()->json(
+            $this->eventoService->registrarResultado($id, $request->all())
         );
     }
 }

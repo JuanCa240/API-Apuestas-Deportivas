@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\EventoController;
+use App\Http\Controllers\Admin\ApuestaController;
 use App\Http\Controllers\Admin\CuotaController;
 
 Route::prefix('auth')->group(function(){
