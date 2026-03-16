@@ -22,6 +22,9 @@ Route::middleware('auth:api')->group(function(){
     Route::get('/eventos/{id}', [EventoController::class,'show']);
     Route::put('/eventos/{id}', [EventoController::class,'update']);
     Route::delete('/eventos/{id}', [EventoController::class,'destroy']);
+    Route::post('/apuestas',[ApuestaController::class,'store']);
+    Route::get('/mis-apuestas',[ApuestaController::class,'misApuestas']);
+    Route::get('/apuestas/{id}',[ApuestaController::class,'show']);
 
 
 });
