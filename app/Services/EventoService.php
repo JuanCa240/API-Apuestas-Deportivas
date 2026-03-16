@@ -24,4 +24,42 @@ class EventoService{
         return $evento;
     }
 
+    public function show($id)
+    {
+        $evento = Evento::find($id);
+            if(!$evento){
+            throw new \Exception("Evento no encontrado");
+        }
+
+        return $evento;
+    }
+
+    public function destroy($id)
+    {
+        $evento = Evento::find($id);
+        if(!$evento){
+            throw new \Exception("Evento no encontrado");
+        }
+
+        $evento->delete();
+        return ['message' => 'Evento eliminado'];
+    }
+
+    public function update($id, $data)
+    {
+        $evento = Evento::find($id);
+            if(!$evento){
+            throw new \Exception("Evento no encontrado");
+       }
+
+        $evento->update([
+            'deporte' => $data['deporte'],
+            'equipo_local' => $data['equipo_local'],
+            'equipo_visitante' => $data['equipo_visitante'],
+            'fecha' => $data['fecha']
+        ]);
+
+        return $evento;
+    }
+
 }
