@@ -29,6 +29,7 @@ Route::middleware('auth:api')->group(function(){
     Route::post('/apuestas',[ApuestaController::class,'store']);
     Route::get('/mis-apuestas',[ApuestaController::class,'misApuestas']);
     Route::get('/apuestas/{id}',[ApuestaController::class,'show']);
+    Route::put('/eventos/{id}/resultado',[EventoController::class,'resultado']);
 
 
     // CUOTAS
