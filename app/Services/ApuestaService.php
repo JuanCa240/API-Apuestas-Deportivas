@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\Apuesta;
+use App\Models\Cuota;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ApuestaService
 {
@@ -21,6 +24,11 @@ class ApuestaService
         }
 
         DB::beginTransaction();
+
+        //esto es para que el editor entienda que $user es un modelo User de Laravel
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
 
         try {
 
