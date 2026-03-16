@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Models\Apuesta;
 use App\Models\Cuota;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Enums\EstadoApuesta;
 
 class ApuestaService
 {
@@ -13,43 +13,55 @@ class ApuestaService
     public function crearApuesta($data)
     {
         $user = auth()->user();
+
         $cuota = Cuota::find($data['cuota_id']);
 
         if (!$cuota) {
-            throw new \Exception("Cuota no encontrada");
+            return response()->json([
+                'message' => 'Cuota no encontrada'
+            ], 404);
         }
 
         if ($user->saldo < $data['monto']) {
-            throw new \Exception("Saldo insuficiente");
+            return response()->json([
+                'message' => 'Saldo insuficiente'
+            ], 422);
         }
 
         DB::beginTransaction();
 
-        //esto es para que el editor entienda que $user es un modelo User de Laravel
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
-
-
         try {
 
+            // Descontar saldo
             $user->saldo -= $data['monto'];
             $user->save();
 
+            // Crear apuesta
             $apuesta = Apuesta::create([
-                'user_id' => $user->id,
-                'cuota_id' => $cuota->id,
+                'usuario_id' => $user->id,
+                'evento_id' => $cuota->evento_id,
+                'tipo_apuesta' => $cuota->tipo_apuesta,
                 'monto' => $data['monto'],
-                'estado' => 'pendiente',
+                'cuota' => $cuota->cuota,
+                'estado' => EstadoApuesta::PENDIENTE->value,
                 'ganancia' => $data['monto'] * $cuota->cuota
             ]);
 
             DB::commit();
 
-            return $apuesta;
+            return response()->json([
+                'message' => 'Apuesta creada correctamente',
+                'apuesta' => $apuesta
+            ], 201);
+
         } catch (\Exception $e) {
 
             DB::rollBack();
-            throw $e;
+
+            return response()->json([
+                'message' => 'Error al crear la apuesta'
+            ], 500);
+
         }
     }
 
@@ -57,7 +69,9 @@ class ApuestaService
     {
         $user = auth()->user();
 
-        return Apuesta::where('user_id', $user->id)->get();
+        $apuestas = Apuesta::where('usuario_id', $user->id)->get();
+
+        return response()->json($apuestas);
     }
 
     public function detalleApuesta($id)
@@ -65,15 +79,16 @@ class ApuestaService
         $user = auth()->user();
 
         $apuesta = Apuesta::where('id', $id)
-            ->where('user_id', $user->id)
+            ->where('usuario_id', $user->id)
             ->first();
 
         if (!$apuesta) {
-            throw new \Exception("Apuesta no encontrada");
+            return response()->json([
+                'message' => 'Apuesta no encontrada'
+            ], 404);
         }
 
-        return $apuesta;
+        return response()->json($apuesta);
     }
 
-    public function cobrarApuesta(int $betId) {}
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\EventoController;
 use App\Http\Controllers\Admin\CuotaController;
+use App\Http\Controllers\User\ApuestaController;
 
 Route::prefix('auth')->group(function(){
 
@@ -26,6 +27,8 @@ Route::middleware('auth:api')->group(function(){
     Route::get('/eventos/{id}', [EventoController::class,'show']);
     Route::put('/eventos/{id}', [EventoController::class,'update']);
     Route::delete('/eventos/{id}', [EventoController::class,'destroy']);
+
+    // APUESTAS
     Route::post('/apuestas',[ApuestaController::class,'store']);
     Route::get('/mis-apuestas',[ApuestaController::class,'misApuestas']);
     Route::get('/apuestas/{id}',[ApuestaController::class,'show']);
