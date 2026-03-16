@@ -4,28 +4,28 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Evento;
+use App\Services\EventoService;
 
 class EventoController extends Controller
 {
+    private EventoService $eventoService;
+
+    public function __construct(EventoService $eventoService){
+        $this->eventoService = $eventoService;
+    }
+
     public function index()
     {
-        return Evento::all();
+        return response()->json(
+            $this->eventoService->getAll()
+        );
     }
 
     public function store(Request $request)
     {
-        $evento = Evento::create([
-            'deporte' => $request->deporte,
-            'equipo_local' => $request->equipo_local,
-            'equipo_visitante' => $request->equipo_visitante,
-            'fecha' => $request->fecha,
-            'estado' => 'pendiente'
-        ]);
-
         return response()->json([
             'message' => 'Evento creado',
-            'evento' => $evento
+            'evento' => $this->eventoService->crear($request->all())
         ],201);
     }
 
