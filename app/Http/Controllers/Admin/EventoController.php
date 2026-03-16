@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Evento;
+use App\Services\EventoService;
 
 class EventoController extends Controller
 {
+    private $eventoService;
+
+    public function __construct(EventoService $eventoService)
+    {
+        $this->eventoService = $eventoService;
+    }
+
     public function index()
     {
         return Evento::all();
@@ -26,7 +34,7 @@ class EventoController extends Controller
         return response()->json([
             'message' => 'Evento creado',
             'evento' => $evento
-        ],201);
+        ], 201);
     }
 
     public function show($id)

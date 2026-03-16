@@ -4,8 +4,17 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ApuestaService;
 
-class ApuestaController extends Controller{
+class ApuestaController extends Controller
+{
+
+    private $apuestaService;
+    public function __construct(ApuestaService $apuestaService)
+    {
+        $this->apuestaService = $apuestaService;
+    }
+
     public function store(Request $request)
     {
         return response()->json(
@@ -16,7 +25,7 @@ class ApuestaController extends Controller{
     public function misApuestas()
     {
         return response()->json(
-             $this->apuestaService->misApuestas()
+            $this->apuestaService->misApuestas()
         );
     }
 
