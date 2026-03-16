@@ -28,4 +28,25 @@ class EventoController extends Controller
             'evento' => $evento
         ],201);
     }
+
+    public function show($id)
+    {
+        return response()->json(
+            $this->eventoService->show($id)
+        );
+    }
+
+    public function update(Request $request, $id)
+    {
+        return response()->json(
+            $this->eventoService->update($id, $request->all())
+        );
+    }
+
+    public function destroy($id)
+    {
+        return response()->json(
+            $this->eventoService->destroy($id)
+        );
+    }
 }
