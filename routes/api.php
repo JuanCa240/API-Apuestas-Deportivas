@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\EventoController;
 use App\Http\Controllers\Admin\CuotaController;
 use App\Http\Controllers\User\ApuestaController;
+use App\Http\Controllers\User\SaldoController;
 
 Route::prefix('auth')->group(function(){
 
@@ -39,5 +40,10 @@ Route::middleware('auth:api')->group(function(){
     Route::get('/eventos/{evento}/cuotas',[CuotaController::class,'cuotasPorEvento']);
     Route::put('/cuotas/{id}',[CuotaController::class,'update']);
     Route::delete('/cuotas/{id}',[CuotaController::class,'destroy']);
+
+    // SALDO
+    Route::get('/saldo', [SaldoController::class,'verSaldo']);
+    Route::post('/depositar', [SaldoController::class,'depositar']);
+    Route::post('/retirar', [SaldoController::class,'retirar']);
 
 });
