@@ -11,6 +11,20 @@ use App\Http\Controllers\User\SaldoController;
 
 
 Route::prefix('auth')->group(function () {
+/**
+ * Archivo de rutas API
+ *
+ * Define los endpoints principales de la aplicación.
+ * Incluye:
+ * - Autenticación (registro, login, verificación OTP, perfil).
+ * - Gestión de eventos y cuotas.
+ * - Manejo de apuestas de usuarios.
+ * - Operaciones de saldo (consultar, depositar, retirar).
+ *
+ * Todas las rutas protegidas requieren autenticación mediante middleware `auth:api`.
+ */
+
+Route::prefix('auth')->group(function(){
 
     // AUTH
     Route::post('/register', [AuthController::class, 'register']);

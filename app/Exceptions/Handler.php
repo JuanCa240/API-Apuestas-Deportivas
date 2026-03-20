@@ -6,6 +6,17 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Clase Handler
+ *
+ * Se encarga de manejar las excepciones de la aplicación.
+ * Extiende el manejador de excepciones de Laravel y permite:
+ * - Definir excepciones que no deben reportarse.
+ * - Proteger campos sensibles al mostrar errores.
+ * - Registrar excepciones personalizadas.
+ * - Retornar respuestas JSON para errores comunes (ej. 404: recurso no encontrado).
+ */
+
 class Handler extends ExceptionHandler{
 
     protected $dontReport = [

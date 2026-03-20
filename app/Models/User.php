@@ -10,6 +10,25 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+
+/**
+ * Modelo User
+ *
+ * Representa a los usuarios del sistema, incluyendo autenticación, roles y manejo de OTP.
+ * Implementa la interfaz JWTSubject para generar tokens JWT personalizados.
+ *
+ * Atributos:
+ * - $fillable: Define los campos que se pueden asignar masivamente (name, email, password, saldo, role, otp_code, otp_expiration).
+ * - $hidden: Oculta campos sensibles al serializar (password, remember_token, otp_code).
+ * - $casts: Convierte automáticamente ciertos campos a tipos específicos (email_verified_at y otp_expiration como datetime).
+ *
+ * Funciones:
+ * - getJWTIdentifier(): Retorna el identificador único del usuario para el token JWT.
+ * - getJWTCustomClaims(): Agrega el rol del usuario como claim personalizado en el token JWT.
+ * - isAdmin(): Verifica si el usuario tiene rol de administrador.
+ * - isUser(): Verifica si el usuario tiene rol de usuario estándar.
+ */
+
  
 class User extends Authenticatable implements JWTSubject{
     use HasApiTokens, HasFactory, Notifiable;

@@ -7,8 +7,19 @@ use App\Models\Cuota;
 use Illuminate\Support\Facades\DB;
 use App\Enums\EstadoApuesta;
 
-class ApuestaService
-{
+/**
+ * Servicio ApuestaService
+ *
+ * Este servicio maneja toda la lógica relacionada con las apuestas de un usuario.
+ * Contiene funciones para crear apuestas, listar las apuestas propias y ver el detalle de una apuesta específica.
+ *
+ * Funciones:
+ * - crearApuesta($data): Valida saldo y cuota, descuenta el monto del usuario y registra una nueva apuesta en la base de datos.
+ * - misApuestas(): Retorna todas las apuestas realizadas por el usuario autenticado.
+ * - detalleApuesta($id): Retorna la información detallada de una apuesta específica del usuario autenticado.
+ */
+
+class ApuestaService{
 
     public function crearApuesta($data)
     {

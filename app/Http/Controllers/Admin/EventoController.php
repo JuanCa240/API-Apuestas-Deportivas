@@ -6,8 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\EventoService;
 
-class EventoController extends Controller
-{
+/**
+ * Controlador EventoController
+ *
+ * Maneja las operaciones administrativas sobre los eventos deportivos.
+ * Utiliza el servicio EventoService para:
+ * - Listar, crear, mostrar, actualizar y eliminar eventos.
+ * - Registrar resultados y procesar las apuestas asociadas.
+ *
+ * Todas las respuestas se retornan en formato JSON.
+ */
+
+class EventoController extends Controller{
     private EventoService $eventoService;
 
     public function __construct(EventoService $eventoService)

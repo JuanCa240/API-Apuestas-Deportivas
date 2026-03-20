@@ -8,6 +8,25 @@ use App\Models\Apuesta;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Servicio EventoService
+ *
+ * Este servicio maneja la lógica relacionada con los eventos deportivos.
+ * Permite crear, consultar, actualizar y eliminar eventos, así como registrar resultados
+ * y procesar las apuestas asociadas.
+ *
+ * Funciones:
+ * - crear(array $data): Crea un nuevo evento en la base de datos con la información proporcionada.
+ * - getAll(): Obtiene todos los eventos registrados.
+ * - getById(int $id): Retorna un evento específico según su ID, lanzando excepción si no existe.
+ * - actualizar(int $id, array $data): Actualiza los datos de un evento existente según su ID.
+ * - show($id): Busca un evento por ID y lo retorna, lanzando excepción si no existe.
+ * - destroy($id): Elimina un evento de la base de datos según su ID.
+ * - update($id, $data): Actualiza campos específicos de un evento (deporte, equipos, fecha).
+ * - registrarResultado($eventoId, $data): Registra el resultado de un evento, lo marca como finalizado,
+ *   y procesa las apuestas asociadas, acreditando ganancias a los usuarios que acertaron.
+ */
+
 class EventoService
 {
 

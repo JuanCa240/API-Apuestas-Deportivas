@@ -7,8 +7,21 @@ use App\Helpers\OtpHelper;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class AuthService
-{
+
+
+/**
+ * Servicio AuthService
+ *
+ * Este servicio maneja la lógica de autenticación de usuarios.
+ * Incluye registro, inicio de sesión con generación de OTP y verificación de OTP para emitir el token JWT.
+ *
+ * Funciones:
+ * - register(array $data): Registra un nuevo usuario en el sistema con nombre, email y contraseña encriptada.
+ * - login(array $credentials): Valida credenciales, genera un OTP temporal y lo guarda para el usuario autenticado.
+ * - verificarOtp($email, string $otp): Verifica el código OTP ingresado, valida expiración y, si es correcto, devuelve un token JWT junto con los datos del usuario.
+ */
+
+class AuthService{
 
    public function register(array $data)
 {

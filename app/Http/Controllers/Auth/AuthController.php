@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Services\AuthService;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller{
 
     protected $authService;
 
