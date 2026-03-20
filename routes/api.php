@@ -7,6 +7,20 @@ use App\Http\Controllers\Admin\CuotaController;
 use App\Http\Controllers\User\ApuestaController;
 use App\Http\Controllers\User\SaldoController;
 
+
+/**
+ * Archivo de rutas API
+ *
+ * Define los endpoints principales de la aplicación.
+ * Incluye:
+ * - Autenticación (registro, login, verificación OTP, perfil).
+ * - Gestión de eventos y cuotas.
+ * - Manejo de apuestas de usuarios.
+ * - Operaciones de saldo (consultar, depositar, retirar).
+ *
+ * Todas las rutas protegidas requieren autenticación mediante middleware `auth:api`.
+ */
+
 Route::prefix('auth')->group(function(){
 
     // AUTH

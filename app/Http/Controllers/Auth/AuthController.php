@@ -7,6 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Services\AuthService;
 
+/**
+ * Controlador AuthController
+ *
+ * Maneja la autenticación de usuarios en la aplicación.
+ * Utiliza el servicio AuthService para:
+ * - Registrar nuevos usuarios.
+ * - Iniciar sesión con credenciales.
+ * - Verificar códigos OTP para completar el login.
+ * - Obtener información del usuario autenticado.
+ *
+ * Todas las respuestas se retornan en formato JSON.
+ */
+
 class AuthController extends Controller{
 
     protected $authService;

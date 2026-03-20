@@ -6,6 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\CuotaService;
 
+/**
+ * Controlador CuotaController
+ *
+ * Maneja las operaciones administrativas sobre las cuotas de los eventos deportivos.
+ * Utiliza el servicio CuotaService para:
+ * - Crear nuevas cuotas.
+ * - Consultar cuotas asociadas a un evento.
+ * - Actualizar cuotas existentes.
+ * - Eliminar cuotas.
+ *
+ * Todas las respuestas se retornan en formato JSON.
+ */
+
 class CuotaController extends Controller{
 
     private CuotaService $cuotaService;

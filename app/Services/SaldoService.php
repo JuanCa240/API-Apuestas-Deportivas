@@ -5,6 +5,19 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Servicio SaldoService
+ *
+ * Este servicio maneja la lógica relacionada con el saldo de los usuarios.
+ * Permite consultar el saldo actual, realizar depósitos y efectuar retiros con validaciones
+ * de monto y disponibilidad de fondos.
+ *
+ * Funciones:
+ * - obtenerSaldo(): Retorna el saldo actual del usuario autenticado.
+ * - depositar($data): Permite al usuario depositar dinero en su cuenta, validando que el monto sea válido.
+ * - retirar($data): Permite al usuario retirar dinero de su cuenta, validando monto y que exista saldo suficiente.
+ */
+
 class SaldoService
 {
 
@@ -21,7 +34,7 @@ class SaldoService
     // Depositar dinero en la cuenta
     public function depositar($data)
     {
-        /** @var User $user */
+        
         $user = auth()->user();
 
         if(!isset($data['monto']) || $data['monto'] <= 0){

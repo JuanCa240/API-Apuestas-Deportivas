@@ -6,8 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\SaldoService;
 
-class SaldoController extends Controller
-{
+/**
+ * Controlador SaldoController
+ *
+ * Maneja las operaciones relacionadas con el saldo de los usuarios.
+ * Utiliza el servicio SaldoService para:
+ * - Consultar el saldo actual.
+ * - Realizar depósitos.
+ * - Efectuar retiros.
+ *
+ * Todas las respuestas se retornan en formato JSON.
+ */
+
+class SaldoController extends Controller{
     private $saldoService;
 
     public function __construct(SaldoService $saldoService)
