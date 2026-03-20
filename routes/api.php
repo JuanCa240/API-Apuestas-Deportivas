@@ -10,7 +10,6 @@ use App\Http\Controllers\User\ApuestaController;
 use App\Http\Controllers\User\SaldoController;
 
 
-Route::prefix('auth')->group(function () {
 /**
  * Archivo de rutas API
  *
