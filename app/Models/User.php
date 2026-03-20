@@ -13,6 +13,9 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  
 class User extends Authenticatable implements JWTSubject{
     use HasApiTokens, HasFactory, Notifiable;
+
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USUARIO = 'usuario';
    
 
     protected $fillable = [

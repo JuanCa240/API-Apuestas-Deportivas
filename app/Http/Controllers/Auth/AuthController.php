@@ -7,25 +7,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Services\AuthService;
 
-class AuthController extends Controller{
+class AuthController extends Controller
+{
 
     protected $authService;
 
-    public function __construct(AuthService $authService){
+    public function __construct(AuthService $authService)
+    {
         $this->authService = $authService;
     }
 
-    public function register(Request $request){
-        $validator = Validator::make($request->all(),[
-            'name'=>'required|string',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:6'
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
-                'errors'=>$validator->errors()
-            ],422);
+                'errors' => $validator->errors()
+            ], 422);
         }
 
         return $this->authService->register($request->all());
@@ -47,7 +50,8 @@ class AuthController extends Controller{
         return $this->authService->login($request->only('email', 'password'));
     }
 
-    public function verificarOtp(Request $request){
+    public function verificarOtp(Request $request)
+    {
         $validador = Validator::make($request->all(), [
             'email' => 'required|email',
             'otp' => 'required'
@@ -65,7 +69,8 @@ class AuthController extends Controller{
         );
     }
 
-    public function me(){
+    public function me()
+    {
         return response()->json(auth('api')->user());
     }
 }
